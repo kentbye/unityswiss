@@ -768,7 +768,8 @@ namespace SwissEphNet.CPort
                     //      continue;
                     //    if (*s == '\0')
                     //      continue;
-                    if (String.IsNullOrWhiteSpace(s)) continue;
+// COMMENT OUT IsNullOrWhiteSpace
+//                    if (String.IsNullOrWhiteSpace(s)) continue;
                     //    if ((sp = strchr(s, '#')) != NULL)
                     //      *sp = '\0';
                     int ip = s.IndexOf('#');
@@ -930,15 +931,18 @@ namespace SwissEphNet.CPort
             z = 0;
             while (true) {
                 sp = sp.TrimStart(' ', '\t');
-                if (String.IsNullOrWhiteSpace(sp) || sp.StartsWith("+") || sp.StartsWith("-")) {
+// COMMENT OUT
+//                if (String.IsNullOrWhiteSpace(sp) || sp.StartsWith("+") || sp.StartsWith("-")) {
+				if (sp.StartsWith("+") || sp.StartsWith("-")) {
                     if (z > 0)
                         doutp += fac;
                     isgn = 1;
                     if (sp != null && sp.StartsWith("-"))
                         isgn = -1;
                     fac = 1 * isgn;
-                    if (String.IsNullOrWhiteSpace(sp))
-                        return retc;
+// COMMENT OUT
+//                    if (String.IsNullOrWhiteSpace(sp))
+//                        return retc;
                     sp = sp.Substring(1);
                 } else {
                     sp = sp.TrimStart('*', ' ', '\t');
