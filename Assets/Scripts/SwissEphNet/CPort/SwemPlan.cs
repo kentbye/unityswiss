@@ -923,8 +923,9 @@ namespace SwissEphNet.CPort
             tt[2] = tt[1] * tt[1];
             tt[3] = tt[2] * tt[1];
             tt[4] = tt[3] * tt[1];
-            if (sinp.Contains(new char[] { '+', '-' }))
-                retc = 1; /* with additional terms */
+// COMMENT OUT
+//            if (sinp.Contains(new char[] { '+', '-' }))
+//                retc = 1; /* with additional terms */
             sp = sinp;
             doutp = 0;
             fac = 1;
