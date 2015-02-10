@@ -768,10 +768,9 @@ namespace SwissEphNet.CPort
                     //      continue;
                     //    if (*s == '\0')
                     //      continue;
-// COMMENT OUT IsNullOrWhiteSpace
-//                    if (String.IsNullOrWhiteSpace(s)) continue;
-                    //    if ((sp = strchr(s, '#')) != NULL)
-                    //      *sp = '\0';
+                    if (s.IsNullOrWhiteSpace()) continue;
+//                        if ((sp = strchr(s, '#')) != NULL)
+//                          *sp = '\0';
                     int ip = s.IndexOf('#');
                     if (ip >= 0) s = s.Substring(0, ip);
                     //    ncpos = swi_cutstr(s, ",", cpos, 20);
@@ -923,27 +922,23 @@ namespace SwissEphNet.CPort
             tt[2] = tt[1] * tt[1];
             tt[3] = tt[2] * tt[1];
             tt[4] = tt[3] * tt[1];
-// COMMENT OUT
-//            if (sinp.Contains(new char[] { '+', '-' }))
-//                retc = 1; /* with additional terms */
+//	            if (sinp.Contains(new char[] { '+', '-' }))
+//	                retc = 1; /* with additional terms */
             sp = sinp;
             doutp = 0;
             fac = 1;
             z = 0;
             while (true) {
                 sp = sp.TrimStart(' ', '\t');
-// COMMENT OUT
-//                if (String.IsNullOrWhiteSpace(sp) || sp.StartsWith("+") || sp.StartsWith("-")) {
-				if (sp.StartsWith("+") || sp.StartsWith("-")) {
+                if (sp.IsNullOrWhiteSpace() || sp.StartsWith("+") || sp.StartsWith("-")) {
                     if (z > 0)
                         doutp += fac;
                     isgn = 1;
                     if (sp != null && sp.StartsWith("-"))
                         isgn = -1;
                     fac = 1 * isgn;
-// COMMENT OUT
-//                    if (String.IsNullOrWhiteSpace(sp))
-//                        return retc;
+                    if (sp.IsNullOrWhiteSpace())
+                        return retc;
                     sp = sp.Substring(1);
                 } else {
                     sp = sp.TrimStart('*', ' ', '\t');

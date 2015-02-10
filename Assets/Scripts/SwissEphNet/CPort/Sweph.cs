@@ -939,11 +939,10 @@ namespace SwissEphNet.CPort
                 /* iflag (ephemeris bit) has possibly changed in main_planet() */
                 iflag = swed.pldat[SEI_EARTH].xflgs;
                 /* asteroid */
-// COMMENT OUT
-//                if (!String.IsNullOrWhiteSpace(serr)) {
-//                    serr2 = serr;
-//                    serr = String.Empty;
-//                }
+                if (!serr.IsNullOrWhiteSpace()) {
+                    serr2 = serr;
+                    serr = String.Empty;
+                }
                 /* asteroid */
                 retc = sweph(tjd, ipli_ast, ifno, iflag, psdp.x, DO_SAVE, null, ref serr);
                 if (retc == ERR || retc == NOT_AVAILABLE)
@@ -964,9 +963,8 @@ namespace SwissEphNet.CPort
                         goto return_error;
                 }
                 /* add warnings from earth/sun computation */
-// COMMENT OUT
-//                if (String.IsNullOrWhiteSpace(serr) && !String.IsNullOrWhiteSpace(serr2))
-//                    serr = "sun: " + serr2;
+                if (serr.IsNullOrWhiteSpace() && !serr2.IsNullOrWhiteSpace())
+                    serr = "sun: " + serr2;
                 /*********************************************** 
                  * fictitious planets                          *    
                  * (Isis-Transpluto and Uranian planets)       *
@@ -1126,9 +1124,7 @@ namespace SwissEphNet.CPort
             //    s= path;
             //  else
             //    s= SE_EPHE_PATH;
-// COMMENT OUT
-//			s = !String.IsNullOrWhiteSpace(path) ? path : SwissEph.SE_EPHE_PATH;
-			s = path;
+			s = !path.IsNullOrWhiteSpace() ? path : SwissEph.SE_EPHE_PATH;
             i = s.Length;
             //  if (*(s + i - 1) != *DIR_GLUE && *s != '\0')
             //    s+= DIR_GLUE;
@@ -5588,11 +5584,10 @@ namespace SwissEphNet.CPort
             }
             /* star elements from last call: */
             //if (*slast_stardata != '\0' && strcmp(slast_starname, sstar) == 0) {
-// COMMENT OUT
-//            if (!String.IsNullOrWhiteSpace(slast_stardata) && slast_starname.Equals(sstar)) {
-//                s = slast_stardata;
-//                goto found;
-//            }
+			if (!slast_stardata.IsNullOrWhiteSpace() && slast_starname.Equals(sstar)) {
+                s = slast_stardata;
+                goto found;
+            }
             /******************************************************
              * Star file
              * close to the beginning, a few stars selected by Astrodienst.
@@ -6245,9 +6240,8 @@ namespace SwissEphNet.CPort
                             if ((fp = swi_fopen(-1, SwissEph.SE_ASTNAMFILE, swed.ephepath, ref sdummy)) != null) {
                                 while (ipli != iplf && ((sp = fp.ReadLine()) != null)) {
                                     sp = sp.TrimStart(' ', '\t', '(', '[', '{');
-// COMMENT OUT
-//                                    if (String.IsNullOrWhiteSpace(sp) || sp.StartsWith("#"))
-//                                        continue;
+                                    if (sp.IsNullOrWhiteSpace() || sp.StartsWith("#"))
+                                        continue;
                                     /* catalog number of body of current line */
                                     int spi = sp.IndexOfFirstNot('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
                                     if (spi < 0) continue;

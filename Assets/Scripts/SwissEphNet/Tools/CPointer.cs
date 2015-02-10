@@ -15,6 +15,9 @@ namespace SwissEphNet
         T[] BaseArray;
 
         int BaseIndex;
+		public CPointer()
+		{
+				}
 
         /// <summary>
         /// Create new struct

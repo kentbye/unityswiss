@@ -20,12 +20,22 @@ namespace SwissEphNet
             return s.Contains(c.ToString());
         }
 
+		public static bool IsNullOrWhiteSpace(this String s) {
+			if (s != null) {
+				for (int i = 0; i < s.Length; i++) {
+					if (!char.IsWhiteSpace(s[i])) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
         /// <summary>
         /// String.Contains() for Char
         /// </summary>
         public static bool Contains(this String s, Char[] charSet) {
-// COMMENT OUT
-//            if (charSet == null || String.IsNullOrWhiteSpace(s)) return false;
+            if (charSet == null || s.IsNullOrWhiteSpace()) return false;
             foreach (var c in charSet) {
                 if (s.Contains(c)) return true;
             }
