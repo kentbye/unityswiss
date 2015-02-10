@@ -8,7 +8,7 @@ class main : MonoBehaviour {
 	public double inputDate = 2443022.711806;
 	public double[] planetLongitude = new double[20]; // Store the longitude for up to 20 objects
 	public GameObject[] planet = new GameObject[20];
-	public float smooth = 2.0F;
+	public float smooth = 2.0F; 
 	public float tiltAngle = 30.0F;
 	
 	// Use this for initialization

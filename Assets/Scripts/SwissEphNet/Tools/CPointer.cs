@@ -9,7 +9,8 @@ namespace SwissEphNet
     /// <summary>
     /// Simulate a C pointer
     /// </summary>
-    public struct CPointer<T>
+//    public struct CPointer<T>
+	public class CPointer<T>
     {
         T[] BaseArray;
 
