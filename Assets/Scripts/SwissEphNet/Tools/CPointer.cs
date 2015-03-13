@@ -12,12 +12,12 @@ namespace SwissEphNet
 //    public struct CPointer<T>
 	public class CPointer<T>
     {
-        T[] BaseArray;
+        public T[] BaseArray;
+        public int BaseIndex;
 
-        int BaseIndex;
 		public CPointer()
 		{
-				}
+		}
 
         /// <summary>
         /// Create new struct
@@ -107,42 +107,64 @@ namespace SwissEphNet
         /// Test if an inner array is the same of an array
         /// </summary>
         public static bool operator ==(CPointer<T> access, T[] array) {
-            return access.BaseArray == array && access.BaseIndex == 0;
+			if((object)access == null)
+				return array == null;
+			else
+				return access.BaseArray == array && access.BaseIndex == 0;
         }
 
         /// <summary>
         /// Test if an inner array is not the same of an array
         /// </summary>
         public static bool operator !=(CPointer<T> access, T[] array) {
-            return access.BaseArray != array && access.BaseIndex == 0;
+			if((object)access == null)
+				return array != null;
+			else
+	            return access.BaseArray != array && access.BaseIndex == 0;
         }
 
         /// <summary>
         /// Test if an inner array is the same of an array
         /// </summary>
         public static bool operator ==(T[] array, CPointer<T> access) {
-            return access.BaseArray == array && access.BaseIndex == 0;
+			if((object)access == null)
+				return array == null;
+			else
+	            return access.BaseArray == array && access.BaseIndex == 0;
         }
 
         /// <summary>
         /// Test if an inner array is not the same of an array
         /// </summary>
         public static bool operator !=(T[] array, CPointer<T> access) {
-            return access.BaseArray != array && access.BaseIndex == 0;
+			if((object)access == null)
+				return array != null;
+			else
+	            return access.BaseArray != array && access.BaseIndex == 0;
         }
 
         /// <summary>
         /// Test two pointers equality
         /// </summary>
         public static bool operator ==(CPointer<T> p1, CPointer<T> p2) {
-            return p1.BaseArray == p2.BaseArray && p1.BaseIndex == p2.BaseIndex;
+			if((object)p1 == null)
+				return (object)p2 == null;
+			else if((object)p2 == null)
+				return false;
+			else
+	            return p1.BaseArray == p2.BaseArray && p1.BaseIndex == p2.BaseIndex;
         }
 
         /// <summary>
         /// Test two pointers inequality
         /// </summary>
         public static bool operator !=(CPointer<T> p1, CPointer<T> p2) {
-            return p1.BaseArray != p2.BaseArray || p1.BaseIndex != p2.BaseIndex;
+			if((object)p1 == null)
+				return (object)p2 != null;
+			else if((object)p2 == null)
+				return true;
+			else
+				return p1.BaseArray != p2.BaseArray || p1.BaseIndex != p2.BaseIndex;
         }
 
         /// <summary>

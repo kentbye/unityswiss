@@ -56,16 +56,18 @@ class main : MonoBehaviour {
  			* 	character string to return error messages in case of error
 			*/
 			// STATUS: ERROR 
-			// StackOverflowException: The requested operation caused a stack overflow. 
-			// SwissEphNet.CPointer`1[System.Double]..ctor (System.Double[] baseArray)
-			//			double[] xx = new double[3];
-			//			string serr = "";
-			//			// int iflag = Constants.SEFLG_SPEED; // Calculate speed
-			//			int iflag = 0;
-			//			double jdnr = tjd;
-			//			int ipl = 0;
-			//			swe.swe_calc(jdnr, ipl, iflag, xx, ref serr);
-			//			Debug.Log("planet longitude = " + xx[0]);
+			// OLD: StackOverflowException: The requested operation caused a stack overflow. 
+			// OLD: SwissEphNet.CPointer`1[System.Double]..ctor (System.Double[] baseArray)
+			// NEW: SwissEphNet.CPointer`1[System.Double].op_Inequality (SwissEphNet.CPointer`1 access, System.Double[] array) (at Assets/Scripts/SwissEphNet/Tools/CPointer.cs:117)
+						double[] xx = new double[6]; // This must be 6
+						Debug.Log ("XX: " + xx);
+						string serr = "";
+						//int iflag = Constants.SEFLG_SPEED; // Calculate speed
+						int iflag = 1;
+						double jdnr = tjd;
+						int ipl = 9;
+						swe.swe_calc(jdnr, ipl, iflag, xx, ref serr);
+						Debug.Log("planet longitude = " + xx[0]);
 			
 			
 			// 2. swe_get_planet_name()()
@@ -77,18 +79,18 @@ class main : MonoBehaviour {
 			*/
 			// STATUS: WORKING!
 			//			/// TODO: Debug the opening & reading of seasnam.txt for asteroids > 10004
-			//			int i;
-			//			for (i = 0; i < 23; i++) {
-			//				Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
-			//			}
+						int i;
+//						for (i = 0; i < 23; i++) {
+//							Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
+//						}
+						// Ficticious Planets
+//						for (i = 40; i < 55; i++) {
+//							Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
+//						}
 			//			// Ficticious Planets
-			//			for (i = 40; i < 55; i++) {
-			//				Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
-			//			}
-			//			// Ficticious Planets
-			//			for (i = 10000; i < 10005; i++) {
-			//				Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
-			//			}
+//						for (i = 10000; i < 10005; i++) {
+//							Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
+//						}
 			//
 			
 			// 4. Fixed stars functions
@@ -218,13 +220,13 @@ class main : MonoBehaviour {
 			//Debug.Log(planetNumber + " " + planetLongitude[planetNumber]);
 		}
 		*/
-		
+		/*
 		GameObject lightGameObject = new GameObject("The Light");
 		lightGameObject.AddComponent<Light>();
 		lightGameObject.transform.position = new Vector3(0, 0, 0);
 		// Outer planets are so far away that they are not illuminated by this light source
 		lightGameObject.light.intensity = 1.0f;
-		
+		*/
 		/*
 		double[][] planetLongitude = new double[30][];
 		foreach (int planetNumber in selectedPlanets) {

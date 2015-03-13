@@ -1,8 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/main.cs">
+    <Files>
+      <File FileName="Assets/Scripts/main.cs" Line="62" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/Tools/CPointer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/CPort/SwemPlan.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/CPort/Sweph.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/Extensions/StringExtensions.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/CPort/SwemMoon.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/Tools/C.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/Tools/CFile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SwissEphNet/Tools/C.printf.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/kentbye/Documents/Unity3D/unityswiss/Assets/Scripts/main.cs" line="70" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
