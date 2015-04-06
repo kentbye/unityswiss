@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Runtime.InteropServices;
 using SwissEphNet;
+using animamundi;
 
 class main : MonoBehaviour {
 	public double inputDate = 2443022.711806;
@@ -39,6 +40,8 @@ class main : MonoBehaviour {
 			// STATUS: WORKING
 			double tjd = swe.swe_julday(1976, 09, 01, 05.083333, 1);
 			Debug.Log("swe_julday = " + tjd);
+			astro astro = new astro();
+			Debug.Log(astro.getLongitude(0,tjd));
 			
 			// 2. swe_calc_ut()
 			/**
@@ -59,13 +62,13 @@ class main : MonoBehaviour {
 			// OLD: StackOverflowException: The requested operation caused a stack overflow. 
 			// OLD: SwissEphNet.CPointer`1[System.Double]..ctor (System.Double[] baseArray)
 			// NEW: SwissEphNet.CPointer`1[System.Double].op_Inequality (SwissEphNet.CPointer`1 access, System.Double[] array) (at Assets/Scripts/SwissEphNet/Tools/CPointer.cs:117)
+
 						double[] xx = new double[6]; // This must be 6
-						Debug.Log ("XX: " + xx);
 						string serr = "";
 						//int iflag = Constants.SEFLG_SPEED; // Calculate speed
-						int iflag = 1;
+						int iflag = 0;
 						double jdnr = tjd;
-						int ipl = 9;
+						int ipl = 0;
 						swe.swe_calc(jdnr, ipl, iflag, xx, ref serr);
 						Debug.Log("planet longitude = " + xx[0]);
 			
@@ -79,7 +82,7 @@ class main : MonoBehaviour {
 			*/
 			// STATUS: WORKING!
 			//			/// TODO: Debug the opening & reading of seasnam.txt for asteroids > 10004
-						int i;
+//						int i;
 //						for (i = 0; i < 23; i++) {
 //							Debug.Log("swe_get_planet_name(" + i + ") = " + swe.swe_get_planet_name(i));
 //						}
@@ -153,14 +156,10 @@ class main : MonoBehaviour {
 			// 12. House cusp calculation
 			// 12.1 swe_houses()
 			
-			
-			
 		}
 		
 		
-		
-		/*		
-		// Set up array and textures of major planets
+		//Set up array and textures of major planets
 		int[] selectedPlanets = new int[] { 0, 2, 3, 4, 5, 6, 7, 8, 9};
 		string[] planetTextureArray = new string[] { 
 			"sunmap",
@@ -179,22 +178,19 @@ class main : MonoBehaviour {
 			"sunmap", // Apogee
 			"earthmap1k"
 		};
-*/
-		/* // Relative sizes of the planets
-		 * float[] planetDiameter = new float[] {
-						109.167f,
-						0.27256f,
-						0.3829f,
-						0.9496f,
-						0.53320f,
-						11.2212f,
-						9.4597f,
-						4.01177f,
-						3.884790f,
-						0.185214f
-				};
-		*/
-		/*
+		 // Relative sizes of the planets
+//		 float[] planetDiameter = new float[] {
+//						109.167f,
+//						0.27256f,
+//						0.3829f,
+//						0.9496f,
+//						0.53320f,
+//						11.2212f,
+//						9.4597f,
+//						4.01177f,
+//						3.884790f,
+//						0.185214f
+//				};
 		float[] planetDiameter = new float[] {
 			0.3f,
 			0.27256f,
@@ -212,45 +208,43 @@ class main : MonoBehaviour {
 			0.1f,
 			0.2f
 		};
-*/
-		
-		/*
-		foreach (int planetNumber in selectedPlanets) {
-			planetLongitude[planetNumber] = swisseph.getLongitude (planetNumber, inputDate);
-			//Debug.Log(planetNumber + " " + planetLongitude[planetNumber]);
-		}
-		*/
-		/*
+
+//		double[][] planetLongitude = new double[30][];
+
+//		foreach (int planetNumber in selectedPlanets) {
+//			planetLongitude[planetNumber] = astro.getLongitude (planetNumber, inputDate);
+//			Debug.Log(planetNumber + " " + planetLongitude[planetNumber]);
+//		}
+
 		GameObject lightGameObject = new GameObject("The Light");
 		lightGameObject.AddComponent<Light>();
 		lightGameObject.transform.position = new Vector3(0, 0, 0);
 		// Outer planets are so far away that they are not illuminated by this light source
 		lightGameObject.light.intensity = 1.0f;
-		*/
-		/*
-		double[][] planetLongitude = new double[30][];
-		foreach (int planetNumber in selectedPlanets) {
-			planetLongitude[planetNumber] = new double[3];
-			planetLongitude[planetNumber] = swisseph.getLongitude (planetNumber, inputDate);
-			planet[planetNumber] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			planet[planetNumber].name = "Planet" + planetNumber;
-			//planet[planetNumber].transform.position = new Vector3((float)planetLongitude[planetNumber][0], (float)planetLongitude[planetNumber][2], (float)planetLongitude[planetNumber][1]);
-			//planet[planetNumber].transform.localScale = new Vector3(planetDiameter[planetNumber], planetDiameter[planetNumber], planetDiameter[planetNumber]);
-			//Texture2D planetTexture = Resources.Load(planetTextureArray[planetNumber]) as Texture2D;
-			//planet[planetNumber].renderer.material.mainTexture = planetTexture;
 
-			for (int i = 0; i < 3; i++) { 
-				Debug.Log(planetNumber + " " + planetLongitude[planetNumber][i]); 
-			}
 
-		}
-		*/
+//		foreach (int planetNumber in selectedPlanets) {
+//			planetLongitude[planetNumber] = new double[3];
+//			planetLongitude[planetNumber] = astro.getLongitude (planetNumber, inputDate);
+//			planet[planetNumber] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+//			planet[planetNumber].name = "Planet" + planetNumber;
+//			//planet[planetNumber].transform.position = new Vector3((float)planetLongitude[planetNumber][0], (float)planetLongitude[planetNumber][2], (float)planetLongitude[planetNumber][1]);
+//			//planet[planetNumber].transform.localScale = new Vector3(planetDiameter[planetNumber], planetDiameter[planetNumber], planetDiameter[planetNumber]);
+//			//Texture2D planetTexture = Resources.Load(planetTextureArray[planetNumber]) as Texture2D;
+//			//planet[planetNumber].renderer.material.mainTexture = planetTexture;
+//
+//			for (int i = 0; i < 3; i++) { 
+//				Debug.Log(planetNumber + " " + planetLongitude[planetNumber][i]); 
+//			}
+//
+//		}
+
 		
-		/*
+
 		double[][] planetXYZ = new double[30][];
 		foreach (int planetNumber in selectedPlanets) {
 			planetXYZ[planetNumber] = new double[3];
-			planetXYZ[planetNumber] = swisseph.getPlanetXYZ (planetNumber, inputDate);
+			planetXYZ[planetNumber] = astro.getPlanetXYZ (planetNumber, inputDate);
 			planet[planetNumber] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			planet[planetNumber].name = "Planet" + planetNumber;
 			planet[planetNumber].transform.position = new Vector3((float)planetXYZ[planetNumber][0], (float)planetXYZ[planetNumber][2], (float)planetXYZ[planetNumber][1]);
@@ -263,7 +257,7 @@ class main : MonoBehaviour {
 //			}
 
 		}
-		*/
+
 		
 		/*
 		double[][] planetHeliocentric = new double[20][];
@@ -283,7 +277,7 @@ class main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		/*
+
 		int[] selectedPlanets = new int[] { 0, 2, 3, 4, 5, 6, 7, 8, 9 };
 		
 		if(Input.GetKey(KeyCode.RightArrow)) {
@@ -295,19 +289,17 @@ class main : MonoBehaviour {
 			float speed = 50.0f;
 			transform.Rotate(0, Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, Space.World);
 		}
-		*/
-		
+
 		
 		// UPDATE POSITION OF THE PLANETS IN XYZ COORDINATES
-		/*
 		double[][] planetXYZ = new double[20][];
 		foreach (int planetNumber in selectedPlanets) {
 			planetXYZ[planetNumber] = new double[3];
-			planetXYZ[planetNumber] = swisseph.getPlanetXYZ (planetNumber, inputDate);
+			planetXYZ[planetNumber] = astro.getPlanetXYZ (planetNumber, inputDate);
 			planet[planetNumber].transform.position = new Vector3((float)planetXYZ[planetNumber][0], (float)planetXYZ[planetNumber][2], (float)planetXYZ[planetNumber][1]);
 		}
 		inputDate = inputDate + 0.2;
-		*/
+
 		
 		/*
 		foreach (int planetNumber in selectedPlanets) {

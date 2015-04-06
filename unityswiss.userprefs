@@ -1,22 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/main.cs">
     <Files>
-      <File FileName="Assets/Scripts/main.cs" Line="62" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/Tools/CPointer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/CPort/SwemPlan.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/CPort/Sweph.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/Extensions/StringExtensions.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/CPort/SwemMoon.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/Tools/C.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/Tools/CFile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SwissEphNet/Tools/C.printf.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/constants.cs" Line="24" Column="21" />
+      <File FileName="Assets/Scripts/SwissEphNet/SwissEph.cs" Line="20" Column="18" />
+      <File FileName="Assets/Scripts/astro.cs" Line="73" Column="46" />
+      <File FileName="Assets/Scripts/main.cs" Line="252" Column="46" />
+      <File FileName="../DLLTest2/Assets/astrology/test.cs" Line="5" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/kentbye/Documents/Unity3D/unityswiss/Assets/Scripts/main.cs" line="70" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
