@@ -220,7 +220,7 @@ class main : MonoBehaviour {
 		lightGameObject.AddComponent<Light>();
 		lightGameObject.transform.position = new Vector3(0, 0, 0);
 		// Outer planets are so far away that they are not illuminated by this light source
-		lightGameObject.light.intensity = 1.0f;
+		lightGameObject.GetComponent<Light>().intensity = 1.0f;
 
 
 //		foreach (int planetNumber in selectedPlanets) {
@@ -250,7 +250,7 @@ class main : MonoBehaviour {
 			planet[planetNumber].transform.position = new Vector3((float)planetXYZ[planetNumber][0], (float)planetXYZ[planetNumber][2], (float)planetXYZ[planetNumber][1]);
 			planet[planetNumber].transform.localScale = new Vector3(planetDiameter[planetNumber], planetDiameter[planetNumber], planetDiameter[planetNumber]);
 			Texture2D planetTexture = Resources.Load(planetTextureArray[planetNumber]) as Texture2D;
-			planet[planetNumber].renderer.material.mainTexture = planetTexture;
+			planet[planetNumber].GetComponent<Renderer>().material.mainTexture = planetTexture;
 
 //			for (int i = 0; i < 3; i++) { 
 //				Debug.Log(planetNumber + " " + planetXYZ[planetNumber][i]); 
