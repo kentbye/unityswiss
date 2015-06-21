@@ -1,26 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using System.Runtime.InteropServices;
 using SwissEphNet;
 using animamundi;
 
-class main : MonoBehaviour {
-	public double inputDate = 2443022.711806;
+public class main : MonoBehaviour {
+	public double inputDate;
 	//public double[] planetLongitude = new double[20]; // Store the longitude for up to 20 objects
-	public GameObject[] planet = new GameObject[20];
-	public float smooth = 2.0F; 
-	public float tiltAngle = 30.0F;
-	public float degToRad = Mathf.PI/180.0F;
+	public GameObject[] planet;
+	public float smooth; 
+	public float tiltAngle;
+	public float degToRad;
+	private GameObject cube;
 	
 	// Use this for initialization
 	void Start () {
+		cube = GameObject.Find("Cube");
+
+		planet = new GameObject[20];
+		inputDate = 2443022.711806;
+		smooth = 2.0F;
+		tiltAngle = 30.0F;
+		degToRad = Mathf.PI/180.0F;
+
 		// 1976 September 01 05:04:59.5 UT  Wednesday
 		// CE 1976 September  1 05:05:00.0 UT
 		//Debug.Log("getDayFromJd " + swisseph.getDayFromJd(2443022.711806, 1));
 		//swisseph.getDayFromJd (inputDate, 1);
 		//swisseph.swe_set_ephe_path("C:\\DLLTest\\sweph\\src");
-		using (var swe = new SwissEph()) {
+//		using (var swe = new SwissEph()) {
 			
 			// 7. Date and time conversion functions
 			// 7.1 Calendar Date and Julian Day
@@ -39,10 +49,10 @@ class main : MonoBehaviour {
  			*   A Julian Day results in 2443022.711806 given an input date of 1976 September 01 05:05:00 UT
     		*/
 			// STATUS: WORKING
-			double tjd = swe.swe_julday(1976, 09, 01, 05.083333, 1);
-			Debug.Log("swe_julday = " + tjd);
-			astro astro = new astro();
-			Debug.Log(astro.getLongitude(0,tjd));
+//			double tjd = swe.swe_julday(1976, 09, 01, 05.083333, 1);
+//			Debug.Log("swe_julday = " + tjd);
+//			astro astro = new astro();
+//			Debug.Log(astro.getLongitude(0,tjd));
 			
 			// 2. swe_calc_ut()
 			/**
@@ -64,14 +74,14 @@ class main : MonoBehaviour {
 			// OLD: SwissEphNet.CPointer`1[System.Double]..ctor (System.Double[] baseArray)
 			// NEW: SwissEphNet.CPointer`1[System.Double].op_Inequality (SwissEphNet.CPointer`1 access, System.Double[] array) (at Assets/Scripts/SwissEphNet/Tools/CPointer.cs:117)
 
-						double[] xx = new double[6]; // This must be 6
-						string serr = "";
-						//int iflag = Constants.SEFLG_SPEED; // Calculate speed
-						int iflag = 0;
-						double jdnr = tjd;
-						int ipl = 0;
-						swe.swe_calc(jdnr, ipl, iflag, xx, ref serr);
-						Debug.Log("planet longitude = " + xx[0]);
+//						double[] xx = new double[6]; // This must be 6
+//						string serr = "";
+//						//int iflag = Constants.SEFLG_SPEED; // Calculate speed
+//						int iflag = 0;
+//						double jdnr = tjd;
+//						int ipl = 0;
+//						swe.swe_calc(jdnr, ipl, iflag, xx, ref serr);
+//						Debug.Log("planet longitude = " + xx[0]);
 			
 			
 			// 2. swe_get_planet_name()()
@@ -156,10 +166,8 @@ class main : MonoBehaviour {
 			
 			// 12. House cusp calculation
 			// 12.1 swe_houses()
-			
-		}
-		
-		
+//		}
+
 		//Set up array and textures of major planets
 		int[] selectedPlanets = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 		string[] planetTextureArray = new string[] { 
@@ -244,16 +252,20 @@ class main : MonoBehaviour {
 //		lightGameObject.GetComponent<Light>().intensity = 1.0f;
 
 		float planetRadius = 2.0f;
+		string name;
 		foreach (int planetNumber in selectedPlanets) {
 			planetLongitude[planetNumber] = astro.getLongitude (planetNumber, inputDate);
 			//Debug.Log(planetNumber + " " + planetLongitude[planetNumber]); 
+
+
+
 			planet[planetNumber] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			planet[planetNumber].name = "Planet" + planetNumber;
 
+
 			planet[planetNumber].transform.position = new Vector3((float)(planetRadius*Mathf.Sin((float)planetLongitude[planetNumber]*degToRad)), 4.5f, (float)(planetRadius*Mathf.Cos((float)planetLongitude[planetNumber]*degToRad)));
 			planet[planetNumber].transform.localScale = new Vector3(planetDiameter[planetNumber], planetDiameter[planetNumber], planetDiameter[planetNumber]);
-			Texture2D planetTexture = Resources.Load(planetTextureArray[planetNumber]) as Texture2D;
-			planet[planetNumber].GetComponent<Renderer>().material.mainTexture = planetTexture;
+			Texture2D planetTexture = Resources.Load(planetTextureArray[planetNumber]) as Texture2D;			planet[planetNumber].GetComponent<Renderer>().material.mainTexture = planetTexture;
 
 		}
 
@@ -285,12 +297,13 @@ class main : MonoBehaviour {
 //			}
 //		}
 
-		
+		Destroy(cube, 1.3F);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 		int[] selectedPlanets = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		
 		if(Input.GetKey(KeyCode.RightArrow)) {
