@@ -60,7 +60,7 @@ namespace animamundi {
 			int iflag = Constants.SEFLG_SPEED; // Calculate speed
 //			int iflag = 0;
 			swe.swe_calc_ut(jdnr, ipl, iflag, xx, ref serr);
-			return xx [0];
+			return xx[0];
 		}
 
 		// Rectangular coordinates returns x, y, z, dx, dy, dz in AU.
