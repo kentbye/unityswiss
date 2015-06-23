@@ -54,11 +54,14 @@ namespace animamundi {
 		// Ecliptic position returns Longitude, Latitude, Distance in AU, 
 		// Speed in longitude (deg/day), Speed in latitude (deg/day), Speed in distance (AU/day)
 		public static double getLongitude(int ipl, double jdnr) {
+			Debug.Log("TEST01");
 			SwissEph swe = new SwissEph();
+			Debug.Log("TEST02");
 			double[] xx = new double[6];
+
 			string serr = "";
 			int iflag = Constants.SEFLG_SPEED; // Calculate speed
-//			int iflag = 0;
+			//			int iflag = 0;
 			swe.swe_calc_ut(jdnr, ipl, iflag, xx, ref serr);
 			return xx[0];
 		}
