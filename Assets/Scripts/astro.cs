@@ -54,9 +54,7 @@ namespace animamundi {
 		// Ecliptic position returns Longitude, Latitude, Distance in AU, 
 		// Speed in longitude (deg/day), Speed in latitude (deg/day), Speed in distance (AU/day)
 		public static double getLongitude(int ipl, double jdnr) {
-			Debug.Log("TEST01");
 			SwissEph swe = new SwissEph();
-			Debug.Log("TEST02");
 			double[] xx = new double[6];
 
 			string serr = "";
@@ -448,9 +446,11 @@ namespace animamundi {
 		* @return Julian Day
  		*   A Julian Day results in 2443022.711806 given an input date of 1976 September 01 05:05:00 UT
     	*/
-//		public static double swe_julday(int year, int month, int day, double hour, int cal) {
-//			return extern_swe_julday(year, month, day, hour, cal);
-//		}
+		public static double getJulianDay(int year, int month, int day, double hour) {
+			SwissEph swe = new SwissEph();
+			int cal = Constants.SE_GREG_CAL;
+			return swe.swe_julday(year, month, day, hour, cal);
+		}
 
 		// 7.1 Calendar Date and Julian Day: swe_julday(), swe_date_conversion(), swe_revjul()
 		/*
@@ -481,41 +481,29 @@ namespace animamundi {
 //			return day;
 //		}
 
-		// 7.2. UTC and Julian day: swe_utc_time_zone(), swe_utc_to_jd(), swe_jdet_to_utc(), swe_jdut1_to_utc()
-		/*
-		[DllImport("swedll32.dll", CharSet = CharSet.Ansi, EntryPoint = "")]
-		private extern static
-		public static {
-			return extern_
+		// 7.2. UTC and Julian day: swe_utc_time_zone()
+		// Take a input date in the local timezone, and then convert it to the UTC time
+		public void getUTCTime(Int32 iyear, Int32 imonth, Int32 iday,
+											   Int32 ihour, Int32 imin, double dsec,
+											   double d_timezone,
+											   ref Int32 iyear_out, ref Int32 imonth_out, ref Int32 iday_out,
+											   ref Int32 ihour_out, ref Int32 imin_out, ref double dsec_out) {
+			SwissEph swe = new SwissEph();
+			swe.swe_utc_time_zone(iyear, imonth, iday, ihour, imin, dsec, d_timezone, ref iyear_out, ref imonth_out, ref iday_out, ref ihour_out, ref imin_out, ref dsec_out);
+			return;
 		}
-		*/
+		// 7.2. UTC and Julian day: swe_utc_to_jd()
+		// Convert the UTC time to the Julian date
+		public Int32 getJulianDayUTC(Int32 iyear, Int32 imonth, Int32 iday,
+		                           Int32 ihour, Int32 imin, double dsec,
+		                           double[] dret, ref string serr) {
+			SwissEph swe = new SwissEph();
+			int gregflag = Constants.SE_GREG_CAL;
+			return swe.swe_utc_to_jd(iyear, imonth, iday, ihour, imin, dsec, gregflag, dret, ref serr);
+		}
 
-		// 7.2. UTC and Julian day: swe_utc_time_zone(), swe_utc_to_jd(), swe_jdet_to_utc(), swe_jdut1_to_utc()
-		/*
-		[DllImport("swedll32.dll", CharSet = CharSet.Ansi, EntryPoint = "")]
-		private extern static
-		public static {
-			return extern_
-		}
-		*/
+		// 7.2. UTC and Julian day:  swe_jdet_to_utc(), swe_jdut1_to_utc()
 
-		// 7.2. UTC and Julian day: swe_utc_time_zone(), swe_utc_to_jd(), swe_jdet_to_utc(), swe_jdut1_to_utc()
-		/*
-		[DllImport("swedll32.dll", CharSet = CharSet.Ansi, EntryPoint = "")]
-		private extern static
-		public static {
-			return extern_
-		}
-		*/
-
-		// 7.2. UTC and Julian day: swe_utc_time_zone(), swe_utc_to_jd(), swe_jdet_to_utc(), swe_jdut1_to_utc()
-		/*
-		[DllImport("swedll32.dll", CharSet = CharSet.Ansi, EntryPoint = "")]
-		private extern static
-		public static {
-			return extern_
-		}
-		*/
 
 		// 7.4. Mean solar time versus True solar time: swe_time_equ()
 		/*
@@ -651,20 +639,23 @@ namespace animamundi {
 		///  17: Equatorial asc., 18: co-ascendant (Koch), 19: co-ascendant(Munkasey),
 		///  20: polar ascendant 
 		///</returns>
-//		public static double[] getHouses(double jdnr, double lat, double lon, char system) {
-//			double[] xx = new double[13];
-//			double[] yy = new double[10];
-//			double[] zz = new double[23];
-//			extern_swe_houses(jdnr, lat, lon, (int)(system), xx, yy);
-//			
-//			for (int i = 0; i < 13; i++) {
-//				zz[i] = xx[i];
-//			}
-//			for (int i = 0; i < 10; i++) {
-//				zz[i + 13] = yy[i];
-//			}
-//			return zz;
-//		}
+		public static double[] getHouses(double jdnr, double lat, double lon, char system) {
+			SwissEph swe = new SwissEph();
+			double[] xx = new double[13];
+			double[] yy = new double[10];
+			double[] zz = new double[23];
+			swe.swe_houses(jdnr, lat, lon, system, xx, yy);
+			
+			for (int i = 0; i < 13; i++) {
+				zz[i] = xx[i];
+//				Debug.Log (i + " " + zz[i]); // Verify that the house system is working correctly.
+			}
+			for (int i = 0; i < 10; i++) {
+				zz[i + 13] = yy[i];
+			}
+
+			return zz;
+		}
 
 		// 12.2 swe_houses_armc()
 		/*
