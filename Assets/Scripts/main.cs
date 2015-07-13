@@ -5,6 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using SwissEphNet;
 using animamundi;
+using Vectrosity;
+
+
 
 public class main : MonoBehaviour {
 	public double inputDate;
@@ -29,9 +32,14 @@ public class main : MonoBehaviour {
 	private astro Astrotester;
 	private float height;
 	private double[] houseCusps;
+	private int orbitLineResolution = 150;
+	private VectorLine outerCircle;
+	private VectorLine innerCircle;
+	
 
 	// Use this for initialization
 	void Start () {
+		
 		cube = GameObject.Find("Cube");
 		planet = new GameObject[20];
 		dret = new double[2];
@@ -171,6 +179,16 @@ public class main : MonoBehaviour {
 //		for (int i = 0; i < 13; i++) {
 //			Debug.Log (i + " " + houseCusps[i]); // Verify that the house system is working correctly.
 //		}
+
+		// Draw Vectrosity Circles
+		innerCircle = new VectorLine("OrbitLine", new Vector3[orbitLineResolution], null, 2.0f, LineType.Continuous);
+		innerCircle.MakeCircle (Vector3.zero, Vector3.up, 1.8f);
+		innerCircle.Draw3DAuto();
+		outerCircle = new VectorLine("OrbitLine", new Vector3[orbitLineResolution], null, 2.0f, LineType.Continuous);
+		outerCircle.MakeCircle (Vector3.zero, Vector3.up, 5.0f);
+		outerCircle.Draw3DAuto();
+		VectorLine.SetLine (Color.white, new Vector3(0, 0, 0), new Vector3(15, 15, 0));
+		
 		
 		
 		//		double[][] planetXYZ = new double[30][];
@@ -229,17 +247,17 @@ public class main : MonoBehaviour {
 		float planetRadius = 2.0f;
 		float height = 2.5f;
 //		Animate the panets
-//		foreach (int planetNumber in selectedPlanets) {
-//			planetLongitude[planetNumber] = astro.getLongitude (planetNumber, inputDate);
-//			planet[planetNumber].transform.position = new Vector3((float)(planetRadius*Mathf.Sin(180.0F-(float)planetLongitude[planetNumber]*degToRad)), height, (float)(planetRadius*Mathf.Cos(180.0F-(float)planetLongitude[planetNumber]*degToRad)));
-//			height = height - 0.7f;
-//		}
+		foreach (int planetNumber in selectedPlanets) {
+			planetLongitude[planetNumber] = astro.getLongitude (planetNumber, inputDate);
+			planet[planetNumber].transform.position = new Vector3((float)(planetRadius*Mathf.Sin(180.0F-(float)planetLongitude[planetNumber]*degToRad)), height, (float)(planetRadius*Mathf.Cos(180.0F-(float)planetLongitude[planetNumber]*degToRad)));
+			height = height - 0.7f;
+		}
 
 		//		Debug.Log (inputDate + " " + planetLongitude[0] + " " + planetLongitude[1] + " " + planetLongitude[2] + " " + planetLongitude[3] + " " + planetLongitude[4] + " " + planetLongitude[5]
 		//		           + " " + planetLongitude[6] + " " + planetLongitude[7] + " " + planetLongitude[8] + " " + planetLongitude[9]);
 
 //		Increment the date		
-//		inputDate = inputDate + 0.25;
+		inputDate = inputDate + 0.25;
 //		inputDate = inputDate + 1.0;
 
 		/*

@@ -1,12 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/astro.cs">
     <Files>
-      <File FileName="Assets/Scripts/constants.cs" Line="24" Column="21" />
-      <File FileName="Assets/Scripts/SwissEphNet/SwissEph.cs" Line="20" Column="18" />
-      <File FileName="Assets/Scripts/astro.cs" Line="73" Column="46" />
-      <File FileName="Assets/Scripts/main.cs" Line="252" Column="46" />
-      <File FileName="../DLLTest2/Assets/astrology/test.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/astro.cs" Line="642" Column="3" />
+      <File FileName="Assets/Scripts/main.cs" Line="190" Column="81" />
+      <File FileName="Assets/Scripts/SwissEphNet/CPort/SweHouse.cs" Line="137" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
